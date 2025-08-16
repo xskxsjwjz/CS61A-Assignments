@@ -248,6 +248,13 @@ def make_averaged(original_function, times_called=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def f(*args):
+        res = 0
+        for i in range(times_called):
+            res += original_function(*args)
+        res /= times_called
+        return res
+    return f
     # END PROBLEM 8
 
 
@@ -261,6 +268,11 @@ def max_scoring_num_rolls(dice=six_sided, times_called=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    scores = []
+    for num_rolls in range(1, 11):
+        average_score = make_averaged(roll_dice, times_called)(num_rolls, dice)
+        scores.append(average_score)
+    return scores.index(max(scores)) + 1
     # END PROBLEM 9
 
 
